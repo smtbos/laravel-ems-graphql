@@ -78,5 +78,6 @@ type Employee {
     company: Company @belongsTo
 }
 
+#import ./auth.graphql
 #import ./user.graphql
 #import ./company.graphql

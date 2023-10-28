@@ -1,0 +1,13 @@
+extend type Query {
+    me: User! @guard @auth
+}
+
+extend type Mutation {
+    loginUser(email: String!, password: String!): String!
+
+    loginCompany(email: String!, password: String!): String!
+
+    loginEmployee(email: String!, password: String!): String!
+
+    updateAvatar(avatar: Upload!): String! @guard
+}
