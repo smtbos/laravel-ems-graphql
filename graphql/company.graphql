@@ -1,0 +1,19 @@
+extend type Query {
+    company(
+        id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+        email: String
+            @eq
+            @rules(apply: ["prohibits:id", "required_without:id", "email"])
+    ): Company @find
+
+    companies(name: String @where(operator: "like")): [Company!]!
+        @paginate(defaultCount: 10)
+}
+
+extend type Mutation {
+    createCompany(
+        name: String @rules(apply: ["required"])
+        email: String @rules(apply: ["required", "email", "unique:companies"])
+        password: String @rules(apply: ["required", "min:8"])
+    ): Company @create
+}
